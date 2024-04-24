@@ -1,1 +1,14 @@
+header{
+    display: flex;
+    align-items:baseline;
+    justify-content: space-between;
+}
+
+header a{
+    text-decoration: none;
+}
+
+nav a{
+    padding: 10px;
+}
 
