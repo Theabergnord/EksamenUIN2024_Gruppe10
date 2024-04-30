@@ -3,9 +3,10 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Header from './components/Header'
 import Home from './components/Home'
 import Genre from './components/Genre'
+import MovieCard from './components/MovieCard'
 
 function App() {
-
+  
   return (
     <>
     <Router>
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/genre' element={<Genre />} />
+        <Route path="/moviecard" element={<MovieCard />} />
       </Routes>
     </Router>
     </>

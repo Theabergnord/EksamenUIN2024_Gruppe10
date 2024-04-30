@@ -12,3 +12,9 @@ nav a{
     padding: 10px;
 }
 
+.movieCard img{
+    width: 15em;
+    height: auto;
+    margin-top: 1em;
+    box-shadow: 10px 5px 5px rgb(186, 186, 186);
+}
