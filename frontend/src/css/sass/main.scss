@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+html, body {
+    background-image: linear-gradient(to right, rgb(218, 255, 208), rgb(196, 190, 255), rgb(218, 255, 208));
+}
+
+header{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+header a{
+    text-decoration: none;
+}
+
+nav a{
+    padding: 10px;
+    font-weight: 500;
+}
+
+h1{
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 900;
+    margin: 0;
+    font-size: 65px;
+    padding: 25px;
+    margin-left: 25px;
+    text-shadow: 10px 5px 5px rgb(186, 186, 186);
+}
+
+h2, h3 {
+    font-weight: 400;
+    font-size: 2.2em;
+    font-family: 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
+    padding-left: 55px;
+    margin: 0 0;
+}
+
+h4{
+    font-weight: 400;
+    font-size: 1.4em;
+    font-family: 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
+    margin: 0 0;
+}
+
+p, nav{
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    word-wrap: break-word;
+    padding: 25px;
+    margin-right: 25px;
+}
+
+.Hjem_side {
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: white;
+    background-color: rgb(85, 15, 142);
+    border-radius: 15px;
+}
+
+.movieList{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 50%;
+    padding: 25px;
+    margin-left: 20px;
+    align-items: flex-start;
+}
+
+.movieCard {
+    display: flex;
+    flex-direction: column;
+    max-width: 40%;
+    margin: 10px;
+    padding: 2px;
+    align-items: center;
+    box-sizing: border-box;
+        
+}
+
+.movieCard img{
+    width: 15em;
+    height: auto;
+    margin-top: 1em;
+    box-shadow: 10px 5px 5px rgb(186, 186, 186);
+}
