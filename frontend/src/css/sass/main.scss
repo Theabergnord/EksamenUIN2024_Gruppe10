@@ -1,8 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+//Setter variabler som kan gjenbrukes nedover
+$font_color: rgb(85, 15, 142);
+$shadow: rgb(186, 186, 186);
+$pcolor: rgb(218, 255, 208);
+$scolor: rgb(196, 190, 255);
+$black: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
+$stor_font: 'Bebas Neue', sans-serif;
+$liten_font: 'Poppins', sans-serif;
+
+
 html, body {
-    background-image: linear-gradient(to right, rgb(218, 255, 208), rgb(196, 190, 255), rgb(218, 255, 208));
+    background-image: linear-gradient(to right, $pcolor, $scolor, $pcolor);
 }
 
 header{
@@ -16,24 +27,25 @@ header a{
 }
 
 nav a{
-    padding: 10px;
+    padding: 6px;
     font-weight: 500;
 }
 
 h1{
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: $stor_font;
     font-weight: 900;
+    color: $font_color;
     margin: 0;
     font-size: 65px;
     padding: 25px;
     margin-left: 25px;
-    text-shadow: 10px 5px 5px rgb(186, 186, 186);
+    text-shadow: 10px 5px 5px $shadow;
 }
 
 h2, h3 {
     font-weight: 400;
     font-size: 2.2em;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: $stor_font;
     text-transform: uppercase;
     padding-left: 55px;
     margin: 0 0;
@@ -42,14 +54,15 @@ h2, h3 {
 h4{
     font-weight: 400;
     font-size: 1.4em;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: $stor_font;
     text-transform: uppercase;
     margin: 0 0;
 }
 
 p, nav{
     text-align: left;
-    font-family: 'Poppins', sans-serif;
+    font-family: $liten_font;
+    font-size: 1em;
     word-wrap: break-word;
     padding: 25px;
     margin-right: 25px;
@@ -57,11 +70,16 @@ p, nav{
 
 .Hjem_side {
     text-align: left;
-    font-family: 'Poppins', sans-serif;
+    font-family: $liten_font;
     font-weight: 500;
     color: white;
-    background-color: rgb(85, 15, 142);
-    border-radius: 15px;
+    background-color: $font_color;
+    border-radius: 9px;
+}
+
+.filmIkon, .brukerIkon {
+    font-size: 25px;
+    transform: translate(1px, 7px);
 }
 
 .movieList{
@@ -88,5 +106,5 @@ p, nav{
     width: 15em;
     height: auto;
     margin-top: 1em;
-    box-shadow: 10px 5px 5px rgb(186, 186, 186);
+    box-shadow: 10px 5px 5px $shadow;
 }
