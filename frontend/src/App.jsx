@@ -4,6 +4,7 @@ import Header from './components/Header'
 import Home from './components/Home'
 import Genre from './components/Genre'
 import MovieCard from './components/MovieCard'
+import './css/sass/main.scss'
 
 function App() {
   
