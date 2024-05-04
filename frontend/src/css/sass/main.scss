@@ -11,35 +11,51 @@ $white: rgb(255, 255, 255);
 $stor_font: 'Bebas Neue', sans-serif;
 $liten_font: 'Poppins', sans-serif;
 
-
 html, body {
     background-image: linear-gradient(to right, $pcolor, $scolor, $pcolor);
 }
 
-header{
-    display: flex;
-    align-items:center;
+header {
+    display: block;
+    align-items: center;
     justify-content: space-between;
+
+    @media (min-width: 650px) {
+        display: flex;
+    }
 }
 
-header a{
+header a {
     text-decoration: none;
+    padding-top: 20px;
 }
 
-nav a{
-    padding: 6px;
+nav a {
+    display: block;
+    padding: 1em;
     font-weight: 500;
+
+    @media (min-width: 942px) {
+        padding: 6px;
+        display: inline;
+        cursor: pointer;
+    }
 }
 
-h1{
+h1 {
     font-family: $stor_font;
     font-weight: 900;
     color: $font_color;
-    margin: 0;
+    margin: 0 auto;
     font-size: 65px;
     padding: 25px;
-    margin-left: 25px;
     text-shadow: 10px 5px 5px $shadow;
+    text-align: center;
+
+    @media (min-width: 650px) {
+        margin: 0;
+        margin-left: 25px;
+    }
 }
 
 h2, h3 {
@@ -47,34 +63,59 @@ h2, h3 {
     font-size: 2.2em;
     font-family: $stor_font;
     text-transform: uppercase;
-    padding-left: 55px;
-    margin: 0 0;
+    margin: 0 auto;
+    text-align: center;
+
+    @media (min-width: 650px) {
+        padding-left: 55px;
+        text-align: left;
+    }
 }
 
-h4{
+h4 {
     font-weight: 400;
     font-size: 1.4em;
     font-family: $stor_font;
     text-transform: uppercase;
-    margin: 0 0;
+    margin: 0 auto;
+
+    @media (min-width: 650px) {
+        margin: 0;
+    }
 }
 
-p, nav{
-    text-align: left;
+p, nav {
+    text-align: center;
     font-family: $liten_font;
     font-size: 1em;
-    word-wrap: break-word;
-    padding: 25px;
-    margin-right: 25px;
+    padding: 50px;
+
+    @media (min-width: 960px) {
+        text-align: center;
+        word-wrap: break-word;
+        padding: 25px;
+        margin-right: 25px;
+    }
 }
 
 .Hjem_side {
-    text-align: left;
-    font-family: $liten_font;
-    font-weight: 500;
-    color: white;
+    display: inline;
+    border-radius: 25px;
+    padding: 5px 15px;
+    height: 35px;
+    width: 40%;
     background-color: $font_color;
-    border-radius: 9px;
+    color: $white;
+
+    @media (min-width: 650px) {
+        text-align: left;
+        font-family: $liten_font;
+        font-weight: 500;
+        color: $white;
+        padding: 0.2em;
+        background-color: $font_color;
+        border-radius: 9px;
+    }
 }
 
 .filmIkon, .brukerIkon {
@@ -82,29 +123,51 @@ p, nav{
     transform: translate(1px, 7px);
 }
 
-.movieList{
-    display: flex;
+.movieList {
+    display: block;
     flex-wrap: wrap;
-    max-width: 50%;
-    padding: 25px;
-    margin-left: 20px;
-    align-items: flex-start;
+    max-width: 100%;
+
+    @media (min-width: 850px) {
+        display: flex;
+        max-width: 50%;
+        padding: 25px;
+        margin-left: 20px;
+        align-items: flex-start;
+    }
 }
 
 .movieCard {
-    display: flex;
-    flex-direction: column;
-    max-width: 40%;
-    margin: 10px;
-    padding: 2px;
-    align-items: center;
-    box-sizing: border-box;
-        
+    display: block;
+    padding: 2em;
+
+    @media (min-width: 650px) {
+        display: flex;
+        flex-direction: column;
+        max-width: 40%;
+        margin: 10px;
+        padding: 1em;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    @media (min-width: 850px) {
+        max-width: 100%;
+    }
 }
 
-.movieCard img{
-    width: 15em;
+.movieCard img {
+    display: block;
+    width: 100%;
     height: auto;
     margin-top: 1em;
+    margin: 0 auto;
     box-shadow: 10px 5px 5px $shadow;
+
+    @media (min-width: 650px) {
+        width: 15em;
+        height: auto;
+        margin-top: 1em;
+        box-shadow: 10px 5px 5px $shadow;
+    }
 }
