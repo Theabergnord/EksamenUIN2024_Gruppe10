@@ -11,7 +11,7 @@ export default function Header(){
             <nav>
                 <Link to='/' className="Hjem_side"> <TbMovie className="filmIkon" /> Hva skal jeg se?</Link>
                 <Link to='genre'>Bla gjennom sjangere</Link>
-                <Link to='#'> <FaUserCircle className="brukerIkon" /> Bruker? </Link>
+                <Link to='users'> <FaUserCircle className="brukerIkon" /> Bruker? </Link>
             </nav>
         </header>
         
