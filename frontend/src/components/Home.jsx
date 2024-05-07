@@ -23,9 +23,7 @@ export default function Home(){
 
     return(
       /* 
-      Utseende: Dersom du ønsker kan du endre "se sammen" til aside, dersom den skal ligge på siden istedenfor. Endre litt på spasing rundt overskriftene så det ser litt bedre ut?<3 
-
-      Mangler: Endre "bruker" til dynamisk valgt bruker. */
+      Utseende: Dersom du ønsker kan du endre "se sammen" til aside, dersom den skal ligge på siden istedenfor. Endre sass.*/
         <>
         <h2>Hei, bruker</h2>
 
@@ -38,8 +36,14 @@ export default function Home(){
           </ul>
         </div>  
 
+        <div>
+          <h3>Favoritter:</h3>
+          <MovieCard />
+        </div>
+
+
       {/*Overskrift skal inn i div. Må endre på sass slik at det legger seg riktig.*/}
-        <h3>Brukers ønskeliste:</h3>
+          <h3>Ønskeliste:</h3>
         <div className="movieList">
           <MovieCard />
           <MovieCard />
