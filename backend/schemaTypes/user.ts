@@ -12,6 +12,12 @@ export const user = {
         title: 'Bilde',
         name: 'poster',
         type: 'image',
+    },
+    {
+      title: 'Ønskeliste',
+      name: 'wishlist',
+      type: 'array',
+      of: [{type: 'string'}]
     }
   ],
 }
