@@ -17,6 +17,9 @@ console.log(movies)
     )
 }*/
 
+//target="_blank" rel="noopener noreferrer"
+//Kilde target og rel: https://www.elegantthemes.com/blog/wordpress/rel-noopener-noreferrer-nofollow
+
 export default function MovieCard() {
         return (
             <article className="movieCard">
