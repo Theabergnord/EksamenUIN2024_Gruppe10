@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { client } from "../../sanity/client";
 
+
 export default function Home(){
   const [users, setUsers] = useState([]);
 
@@ -17,7 +18,6 @@ export default function Home(){
         console.error('Klarte ikke å hente brukere', error);
       }
     }
-
     getUsers()
   }, [])
 
@@ -31,22 +31,20 @@ export default function Home(){
           <h3>Se sammen med:</h3>
           <ul>
             {users.map((user, index) => (
-              <li key={index}>{user.name}</li>
+              <li className="users" key={index}>{user.name}</li>
             ))}
           </ul>
         </div>  
 
         <div>
           <h3>Favoritter:</h3>
-          <MovieCard />
         </div>
 
 
       {/*Overskrift skal inn i div. Må endre på sass slik at det legger seg riktig.*/}
-          <h3>Ønskeliste:</h3>
+        <h3>Ønskeliste:</h3>
         <div className="movieList">
-          <MovieCard />
-          <MovieCard />
+        <MovieCard/>
         </div>
         
         </>
