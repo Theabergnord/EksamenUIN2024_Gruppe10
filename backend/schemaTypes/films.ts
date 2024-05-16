@@ -14,11 +14,6 @@ export const films = {
         type: 'string',
     },
     {
-        title: 'Bilde',
-        name: 'poster',
-        type: 'image',
-    },
-    {
         title: 'IMDB-ID',
         name: 'imdbid',
         type: 'string',

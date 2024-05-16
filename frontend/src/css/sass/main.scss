@@ -17,7 +17,7 @@ $liten_font: 'Poppins', sans-serif;
 html, body {
     background-image: linear-gradient($pcolor, $scolor);
 
-    @media (min-width: 999px) {
+    @media (min-width: 650px) {
         background-image: linear-gradient(to right, $pcolor, $scolor, $pcolor);
     }
 }
