@@ -1,48 +1,32 @@
 import React, { useState, useEffect } from 'react'
+import { client } from '../../sanity/client'
 
-//Kilde: Generelt oppsett fra forelesningsoppgaver, arbeidskrav og dokumentasjon fra API'et.
+export default function Genres(){
+  const [genre, setGenre] = useState([])
 
-const Genre = () => {
-  const [data, setData] = useState([])
-
-  const getData = async () => {
-    const url = 'https://moviesdatabase.p.rapidapi.com/titles/utils/genres'
-    const options = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': '38f78b4c53mshba9eae8e9b528d4p1477e5jsn8b31042e4a1c',
-        'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+  useEffect(() => {
+    const getGenre = async () => {
+      try {
+        const data = await client.fetch('*[_type == "genre"]{ genre}')
+        setGenre(data)
+      } catch (error) {
+        console.error('Klarte ikke å hente sjangere', error)
       }
     }
 
-    try {
-      const response = await fetch(url, options)
-      const responseData = await response.json()
-      let genres = responseData.results
-
-      //Fjernet det første "tomme" objektet Kilde: https://www.geeksforgeeks.org/remove-empty-elements-from-an-array-in-javascript/
-      genres = genres.filter((genre, index) => index !== 0 || genre !== null)
-
-      setData(genres)
-    } catch (error) {
-      console.error('Error fetching genres:', error)
-    }
-  }
-
-  useEffect(() => {
-    getData()
+    getGenre()
   }, [])
 
-  return (
+  return(
     <div>
       <h2>Samleside for sjangere:</h2>
-      <ul>
-        {data.map(genre => (
-          <li key={genre}>{genre}</li>
-        ))}
+          <ul>
+            {genre.map((genre, index) => (
+              <li key={index}>{genre.genre}</li>
+            ))}
+          </ul>
+            <ul>
       </ul>
     </div>
   )
 }
-
-export default Genre;
