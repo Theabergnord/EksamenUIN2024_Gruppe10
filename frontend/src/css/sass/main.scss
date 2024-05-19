@@ -22,14 +22,12 @@ html, body {
     }
 }
 
-a{
-    color: $font_color;
-}
 
 header {
     display: block;
     align-items: center;
     justify-content: space-between;
+    color: $font_color;
 
     @media (min-width: 650px) {
         display: flex;
@@ -80,6 +78,11 @@ h2, h3 {
         padding-left: 65px;
         text-align: left;
     }
+}
+
+h2 a{
+    color: $white;
+    text-decoration: none;
 }
 
 h4 {
