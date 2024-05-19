@@ -6,14 +6,15 @@ import Genres from './components/Genres'
 import './css/sass/main.scss'
 import Users from './components/Users'
 import Genre from './components/Genre'
+import { UserProvider } from './components/UserContext'
 
 function App() {
   
   return (
     <>
+    <UserProvider>
     <Router>
       <Header />
-
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/genres' element={<Genres />} />
@@ -21,6 +22,7 @@ function App() {
         <Route path='/users' element={<Users />} />
       </Routes>
     </Router>
+    </UserProvider>
     </>
   )
 }
