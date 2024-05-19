@@ -1,5 +1,3 @@
-// UserContext.jsx
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { client } from '../../sanity/client';
 
@@ -20,7 +18,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const fetchUserData = async (userId) => {
-    const query = `*[_type == "user" && _id == $userId]{_id, name, wishlist}`;
+    const query = `*[_type == "user" && _id == $userId]{ _id, name, wishlist }`;
     const params = { userId: userId };
     try {
       const userData = await client.fetch(query, params);

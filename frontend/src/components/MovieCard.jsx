@@ -3,13 +3,12 @@ import { client } from '../../sanity/client';
 
 function MovieCard({ wishlist }) {
   const [movies, setMovies] = useState([]);
-  const [fetchedImdbIds, setFetchedImdbIds] = useState(new Set()); // Set for å lagre fetchede id'er
+  const [fetchedImdbIds, setFetchedImdbIds] = useState(new Set()); //Kilde???
 
   useEffect(() => {
-    if (wishlist) { // 
-      // Fetch movies fra Sanity basert på user's wishlist
-      client
-        .fetch('*[_type == "films" && imdbid in $imdbIds]{ title, genre, imdbid }', { imdbIds: wishlist })
+    if (wishlist) { 
+      // Henter filmer basert på brukerens ønskeliste
+      client.fetch('*[_type == "films" && imdbid in $imdbIds]{ title, genre, imdbid }', { imdbIds: wishlist })
         .then((sanityData) => {
           // Extract IMDb IDs from Sanity data
           const imdbIds = sanityData.map((movie) => movie.imdbid);

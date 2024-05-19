@@ -1,4 +1,3 @@
-// Home.jsx
 import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 import { client } from "../../sanity/client";
@@ -11,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const userData = await client.fetch('*[_type == "user"]{ name }');
+        const userData = await client.fetch('*[_type == "user"]{ _id, name }');
         setUsers(userData)
       } catch (error) {
         console.error('Klarte ikke å hente brukere', error);
@@ -39,11 +38,11 @@ export default function Home() {
         <h3>Favoritter:</h3>
       </div>
 
-      {wishlist.length > 0 && ( // Conditionally render MovieCard only if there are items in the wishlist
+      {currentUser && currentUser.wishlist && currentUser.wishlist.length > 0 && ( // Sjekk at wishlist eksisterer og har elementer
         <>
           <h3>Ønskeliste:</h3>
           <div className="movieList">
-            <MovieCard wishlist={wishlist} /> {/* Pass the wishlist as a prop */}
+            <MovieCard wishlist={currentUser.wishlist} /> {/* Sender wishlist som en prop */}
           </div>
         </>
       )}
