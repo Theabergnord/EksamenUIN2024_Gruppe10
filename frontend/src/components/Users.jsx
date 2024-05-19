@@ -5,7 +5,7 @@ import { useUser } from "./UserContext";
 
 export default function Users(){
     const [users, setUsers] = useState([]);
-    const { setUser } = useUser();
+    const { currentUser, setUser } = useUser();
 
   // Kilde: https://www.sanity.io/docs/js-client
   useEffect(() => {
@@ -24,12 +24,14 @@ export default function Users(){
   const handleUserSelect = (userId) => {
     setUser(userId)
   }
+
+  const otherUsers = users.filter(user => user._id !== currentUser?._id);
     
     return(
         <>
          <div>
           <ul>
-            {users.map((user, index) => (
+            {otherUsers.map((user, index) => (
               <li key={index} onClick={() => handleUserSelect(user._id)}>
                 {user.name}</li>
             ))}

@@ -8,13 +8,13 @@ import { useUser } from "./UserContext";
 
 export default function Home(){
   const [users, setUsers] = useState([]);
-  const { currentUser } = useUser();
+  const { currentUser, setUser } = useUser();
 
   // Kilde: https://www.sanity.io/docs/js-client
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const userData = await client.fetch('*[_type == "user"]{ name }');
+        const userData = await client.fetch('*[_type == "user"]{ _id, name }');
         setUsers(userData)
       } catch (error) {
         console.error('Klarte ikke å hente brukere', error);
@@ -22,6 +22,9 @@ export default function Home(){
     }
     getUsers()
   }, [])
+
+
+  const otherUsers = users.filter(user => user._id !== currentUser?._id);
 
     return(
       /* 
@@ -32,7 +35,7 @@ export default function Home(){
         <div>
           <h3>Se sammen med:</h3>
           <ul>
-            {users.map((user, index) => (
+            {otherUsers.map((user, index) => (
               <li className="users" key={index}>{user.name}</li>
             ))}
           </ul>
