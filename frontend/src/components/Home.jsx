@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 export default function Home(){
   const [users, setUsers] = useState([]);
   const { currentUser } = useUser();
+
+  //Kilde: useNavigate: https://medium.com/@bobjunior542/using-usenavigate-in-react-router-6-a-complete-guide-46f51403f430 , 
   const navigate = useNavigate();
 
   useEffect(() => {
