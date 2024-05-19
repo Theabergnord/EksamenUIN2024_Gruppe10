@@ -7,21 +7,35 @@ import './css/sass/main.scss'
 import Users from './components/Users'
 import Genre from './components/Genre'
 import { UserProvider } from './components/UserContext'
+import { useLocation } from 'react-router-dom'
+
+//Kilde: https://stackoverflow.com/questions/35583334/react-router-get-full-current-path-name
+const AppContent = () => {
+  let location = useLocation()
+
+return (
+  <>
+  {/*Dersom man er på Users-siden skal ikke Header synes*/}
+  {location.pathname !== '/users' && <Header />}
+  <Routes>
+      <Route path='/users' element={<Users />} />
+      <Route path='/' element={<Home />} />
+      <Route path='/genres' element={<Genres />} />
+      <Route path='/genres/:genre' element={<Genre />} />
+  </Routes>
+  </>
+)
+}
+
 
 function App() {
   
   return (
     <>
     <UserProvider>
-    <Router>
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/genres' element={<Genres />} />
-        <Route path='/genres/:genre' element={<Genre />} />
-        <Route path='/users' element={<Users />} />
-      </Routes>
-    </Router>
+      <Router>
+        <AppContent />
+      </Router>
     </UserProvider>
     </>
   )

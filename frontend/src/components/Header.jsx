@@ -16,7 +16,7 @@ export default function Header(){
                 {currentUser ? (
                 <Link to='users'> <FaUserCircle className="brukerIkon" />{currentUser.name}</Link>
                 ) : (
-                <Link to='users'> <FaUserCircle className="brukerIkon" /> Bruker?</Link>
+                <Link to='users'> <FaUserCircle className="brukerIkon" /> Logg inn</Link>
                 )}
             </nav>
         </header>
