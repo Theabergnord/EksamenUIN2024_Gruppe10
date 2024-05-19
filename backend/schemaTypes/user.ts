@@ -19,5 +19,12 @@ export const user = {
       type: 'array',
       of: [{type: 'string'}]
     }
+  ,
+  {
+    title: 'Favoritter',
+    name: 'favorites',
+    type: 'array',
+    of: [{type: 'string'}]
+  }
   ],
 }
