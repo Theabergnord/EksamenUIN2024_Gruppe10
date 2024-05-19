@@ -1,13 +1,14 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { client } from "../../sanity/client";
-import { useUser } from "./UserContext";
+// Users.jsx
+
+import React, { useState, useEffect } from 'react';
+import { client } from '../../sanity/client';
+import { useUser } from './UserContext';
 
 export default function Users(){
     const [users, setUsers] = useState([]);
     const { setUser } = useUser();
 
-  // Kilde: https://www.sanity.io/docs/js-client
+  // Fetch users fra Sanity
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -16,11 +17,12 @@ export default function Users(){
       } catch (error) {
         console.error('Klarte ikke å hente brukere', error);
       }
-    }
+    };
 
-    getUsers()
-  }, [])
+    getUsers();
+  }, []);
 
+  // Set selected user in UserContext
   const handleUserSelect = (userId) => {
     setUser(userId)
   }

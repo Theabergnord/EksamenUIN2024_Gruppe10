@@ -1,16 +1,13 @@
-import React from "react";
+// Home.jsx
+import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
-import { useState } from "react";
-import { useEffect } from "react";
 import { client } from "../../sanity/client";
 import { useUser } from "./UserContext";
 
-
-export default function Home(){
+export default function Home() {
   const [users, setUsers] = useState([]);
   const { currentUser } = useUser();
 
-  // Kilde: https://www.sanity.io/docs/js-client
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -38,17 +35,18 @@ export default function Home(){
           </ul>
         </div>  
 
-        <div>
-          <h3>Favoritter:</h3>
-        </div>
+      <div>
+        <h3>Favoritter:</h3>
+      </div>
 
-
-      {/*Overskrift skal inn i div. Må endre på sass slik at det legger seg riktig.*/}
-        <h3>Ønskeliste:</h3>
-        <div className="movieList">
-        <MovieCard/>
-        </div>
-        
+      {wishlist.length > 0 && ( // Conditionally render MovieCard only if there are items in the wishlist
+        <>
+          <h3>Ønskeliste:</h3>
+          <div className="movieList">
+            <MovieCard wishlist={wishlist} /> {/* Pass the wishlist as a prop */}
+          </div>
         </>
-    )
+      )}
+    </>
+  );
 }

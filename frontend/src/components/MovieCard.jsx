@@ -1,36 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { client } from '../../sanity/client';
 
-function MovieCard() {
+function MovieCard({ wishlist }) {
   const [movies, setMovies] = useState([]);
   const [fetchedImdbIds, setFetchedImdbIds] = useState(new Set()); // Set for å lagre fetchede id'er
 
   useEffect(() => {
-    // Fetch filmer fra Sanity
-    console.log('Fetching movies from Sanity...');
-    client
-      .fetch('*[_type == "films"]{ title, genre, imdbid }')
-      .then((sanityData) => {
-        console.log('Sanity data:', sanityData); // Log data fra Sanity
-        // Extracte IMDb IDer fra Sanity data
-        const imdbIds = sanityData.map((movie) => movie.imdbid);
-        console.log('IMDb IDs from Sanity:', imdbIds); // Log imdb IDer
-        // Filtrerer ut imdbid som ikke har blitt fetchet
-        const newImdbIds = imdbIds.filter((imdbId) => !fetchedImdbIds.has(imdbId)); // Sjekk om IMDb ID er lagret
-        console.log('New IMDb IDs to fetch:', newImdbIds); // Log imdb id'er i nye variabelen
-        // Fetche resten av info fra API'et
-        fetchMovieDataFromAPI(newImdbIds);
-      })
-      .catch((error) => {
-        console.error('Error fetching movie data from Sanity:', error);
-      });
-  }, []); 
+    if (wishlist) { // 
+      // Fetch movies fra Sanity basert på user's wishlist
+      client
+        .fetch('*[_type == "films" && imdbid in $imdbIds]{ title, genre, imdbid }', { imdbIds: wishlist })
+        .then((sanityData) => {
+          // Extract IMDb IDs from Sanity data
+          const imdbIds = sanityData.map((movie) => movie.imdbid);
+          // Filter out IMDb IDs that haven't been fetched yet
+          const newImdbIds = imdbIds.filter((imdbId) => !fetchedImdbIds.has(imdbId));
+          // Fetch additional movie data from API
+          fetchMovieDataFromAPI(newImdbIds);
+        })
+        .catch((error) => {
+          console.error('Error fetching movie data from Sanity:', error);
+        });
+    }
+  }, [wishlist, fetchedImdbIds]);
 
+ 
   const fetchMovieDataFromAPI = async (imdbIds) => {
     try {
       console.log('Fetching movie data from API for IMDb IDs:', imdbIds);
       const updatedMovies = await Promise.all(
         imdbIds?.map(async (imdbid) => {
+          if (fetchedImdbIds.has(imdbid)) {
+            console.log('Skipping duplicate IMDb ID:', imdbid);
+            return null; // Skip duplikate IMDb ID
+          }
           const response = await fetch(`https://moviesdatabase.p.rapidapi.com/titles/${imdbid}`, {
             headers: {
               'x-rapidapi-key': '73e3cd1c72msh82218700589087ap19bec3jsnf374b0a39515',
@@ -38,37 +41,30 @@ function MovieCard() {
             },
           });
           const data = await response.json();
-          console.log('API response for', imdbid, ':', data); // Log  API response for hver film
-          if (fetchedImdbIds.has(imdbid)) {
-            console.log('Skipping duplicate IMDb ID:', imdbid);
-            return null; // Skip duplikate imdb id
-          }
-          setFetchedImdbIds((prevImdbIds) => new Set([...prevImdbIds, imdbid])); // Legge til IMDb ID til fetcha IDer
+          console.log('API response for', imdbid, ':', data); 
+          setFetchedImdbIds((prevImdbIds) => new Set([...prevImdbIds, imdbid])); 
           return {
             imdbid,
-            title: data.results && data.results.titleText && data.results.titleText.text, // hente ut title fra API
+            title: data.results && data.results.titleText && data.results.titleText.text, 
             year: data.results && data.results.releaseYear && data.results.releaseYear.year,
             genre: '',
-            imageUrl: data.results && data.results.primaryImage && data.results.primaryImage.url, // Hente ut imageUrl fra API
+            imageUrl: data.results && data.results.primaryImage && data.results.primaryImage.url, 
           };
-        }).filter(Boolean) // Filtrerer ut null values
+        }).filter(Boolean) // Filter ut null verdier
       );
-  
-      console.log('Updated movies:', updatedMovies); // log Filmobject
-      setMovies((prevMovies) => [...prevMovies, ...updatedMovies]); // Oppdatere filmene med den nye dataen
+
+      console.log('Updated movies:', updatedMovies); // Log movie objekter
+      setMovies((prevMovies) => [...prevMovies, ...updatedMovies]); // Update movies med ny data
     } catch (error) {
       console.error('Error fetching movie data from API:', error);
     }
   };
-  
+
   return (
     <div>
-      {movies.length > 0 ? (
-        movies.map((movie, index) => {
-          console.log("Movie data:", movie); // Log hvert movie objekt
-          // Sjekke at alle objekter har disse tre
-          const hasContent = movie.title || movie.genre || movie.imageUrl;
-          //Rendere ut denne ul'en hvis objektet har alt inni hasContent
+      {movies?.length > 0 ? (
+        movies?.map((movie, index) => {     
+          const hasContent = movie.title || movie.genre || movie.imageUrl
           return hasContent && (
             <ul className="movieCard" key={index}>
               {movie.title && (
@@ -78,11 +74,6 @@ function MovieCard() {
                       {movie.title} ({movie.year})
                     </a>
                   </h2>
-                </li>
-              )}
-              {movie.genre && (
-                <li className="movieItem">
-                  <p>{movie.genre}</p>
                 </li>
               )}
               {movie.imageUrl && (
@@ -100,7 +91,6 @@ function MovieCard() {
       )}
     </div>
   );
-  
 }
 
 export default MovieCard;
