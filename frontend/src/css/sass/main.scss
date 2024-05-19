@@ -210,3 +210,14 @@ li {
     margin: 0.2em auto;
     cursor: pointer;
 }
+
+.genre {
+    ul {
+      li {
+        a {
+          color: white; 
+          text-decoration: none;
+        }
+      }
+    }
+  }

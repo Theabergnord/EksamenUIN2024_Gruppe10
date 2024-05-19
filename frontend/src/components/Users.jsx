@@ -11,10 +11,10 @@ export default function Users(){
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const userData = await client.fetch('*[_type == "user"]{ _id, name}');
+        const userData = await client.fetch('*[_type == "user"]{ _id, name}')
         setUsers(userData)
       } catch (error) {
-        console.error('Klarte ikke å hente brukere', error);
+        console.error('Klarte ikke å hente brukere', error)
       }
     }
 
