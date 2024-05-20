@@ -33,8 +33,9 @@ export default function Home() {
 
   const updatePage = (selectedUserName) => {
     navigate(`/comparison/${currentUser.name}_${selectedUserName}`);
-    //page refresh
+    //Page refresh
     window.location.reload();
+    //https://www.freecodecamp.org/news/javascript-refresh-page-how-to-reload-a-page-in-js/
   };
 
   return (

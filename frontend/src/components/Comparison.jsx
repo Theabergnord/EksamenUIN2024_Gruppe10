@@ -19,14 +19,16 @@ function Comparison() {
       try {
         //.split for å dele opp userNames fra url'en
         const nameParts = userNames.split('_');
+
         const selectedUserName = nameParts.find(name => name !== currentUser.name);
+        //https://www.w3schools.com/jsref/jsref_find.asp
 
         if (!selectedUserName) {
           console.error('Selected user name not found in the URL');
           return;
         }
-
-        const query = `
+        
+        const userInfo = `
           *[_type == "user" && name == $userName]{ 
             _id, 
             name, 
@@ -34,14 +36,14 @@ function Comparison() {
             favorites
           }
         `;
-        const params = { userName: selectedUserName };
+        const name = { userName: selectedUserName };
 
         setFetching(true);
 
         await new Promise(resolve => setTimeout(resolve, 1000));
         //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-        const users = await client.fetch(query, params);
+        const users = await client.fetch(userInfo, name);
 
         if (users.length > 0) {
           setSelectedUser(users[0]);
@@ -51,15 +53,13 @@ function Comparison() {
           // filter for å finne felles favorittfilmer
           const commonFavorites = currentUser.favorites.filter(movie => users[0].favorites.includes(movie));
           setCommonFavorites(commonFavorites);
-        } else {
-          console.error('No user found with userNames:', userNames);
-        }
-      } catch (error) {
-        console.error('Error fetching selected user:', error);
+        } 
+
       } finally {
         setLoading(false);
         setFetching(false);
       }
+      //https://stackoverflow.com/questions/44251851/using-an-else-if-statement-with-in-a-try-catch-finally
     };
 
     fetchSelectedUser();
