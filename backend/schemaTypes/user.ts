@@ -24,7 +24,13 @@ export const user = {
     title: 'Favoritter',
     name: 'favorites',
     type: 'array',
-    of: [{type: 'string'}]
+    of: [{type: 'string', to: { type: 'genre'}}]
+  },
+  {
+    name: 'favoriteGenres',
+    type: 'array',
+    title: 'Favoritt Sjanger', 
+    of: [{type: 'string', to: { type: 'genre'}}]
   }
   ],
 }
