@@ -61,21 +61,32 @@ export default function Home() {
       </div>
 
       <section className="movieList_container">
+      <section className="movieList_container">
         {currentUser && currentUser.favorites && currentUser.favorites.length > 0 && (
           <div className="movieList_section">
             <h3>Favoritter:</h3>
             <MovieCard movies={currentUser.favorites} type="favorites" />
             {/* Sender favorites som en prop */}
+            <h3>Favoritter:</h3>
+            <MovieCard movies={currentUser.favorites} type="favorites" />
+            {/* Sender favorites som en prop */}
           </div>
         )}
+        )}
 
+        {/*Overskrift skal inn i div. Må endre på sass slik at det legger seg riktig.*/}
+        {currentUser && currentUser.wishlist && currentUser.wishlist.length > 0 && (
         {/*Overskrift skal inn i div. Må endre på sass slik at det legger seg riktig.*/}
         {currentUser && currentUser.wishlist && currentUser.wishlist.length > 0 && (
           <div className="movieList_section">
             <h3>Ønskeliste:</h3>
             <MovieCard movies={currentUser.wishlist} type="wishlist" />
             {/* Sender wishlist som en prop */}
+            <h3>Ønskeliste:</h3>
+            <MovieCard movies={currentUser.wishlist} type="wishlist" />
+            {/* Sender wishlist som en prop */}
           </div>
+        )}
         )}
       </section>
     </>
