@@ -23,10 +23,13 @@ export default function Genres(){
     <div className='genre'>
       <h2>Samleside for sjangere:</h2>
       <ul>
-            {genre.map((g) => (
-              <li key={g.genre}><Link to={`/genres/${g.genre}`}>{g.genre}</Link></li>
-            ))}
-            </ul>
+        {genre.map((g) => (
+          <li key={g.genre}>
+            <Link to={`/genres/${g.genre}`}>{g.genre}</Link>
+            <button className='favoriteGenre'>Legg til som favoritt</button>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

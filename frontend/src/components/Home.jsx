@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { client } from "../../sanity/client";
 import { useUser } from "./UserContext";
 import { useNavigate } from "react-router-dom";
+import { FaRegSmileBeam } from "react-icons/fa";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -40,7 +41,7 @@ export default function Home() {
 
   return (
     <>
-      <h2>Hei, {currentUser ? currentUser.name : "Logg inn"}</h2>
+      <h2>Hei, <span className="innlogget_bruker">{currentUser ? currentUser.name : "Logg inn"} <FaRegSmileBeam className="innlogget_ikon"/></span></h2>
 
       <div>
         <h3>Se sammen med:</h3>

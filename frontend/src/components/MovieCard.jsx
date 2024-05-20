@@ -15,8 +15,8 @@ function MovieCard({ movies, type }) {
         try {
           const sanityData = await client.fetch('*[_type == "films" && imdbid in $imdbIds]{ title, genre, imdbid }', { imdbIds: movies })
           const imdbIds = sanityData.map(({ imdbid }) => imdbid);
-          const newImdbIds = imdbIds.filter(imdbId => !fetchedImdb.has(imdbId))
-          await fetchMovieData(newImdbIds)
+          const newImdb = imdbIds.filter(imdbId => !fetchedImdb.has(imdbId))
+          await fetchMovieData(newImdb)
         } catch (error) {
           console.error('Klarte ikke hente filmer')
         }
@@ -28,13 +28,14 @@ function MovieCard({ movies, type }) {
  
   const fetchMovieData = async (imdbIds) => {
     try {
+      //Kjører en for loop for hver imdb-id, og hopper over de id'ene som allerede er hentet https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/continue 
       for (const imdbid of imdbIds) {
         if (fetchedImdb.has(imdbid)) {
           continue;
         }
 
-          //Kilde til promise????
-          await new Promise(resolve => setTimeout(resolve, 1000))
+          //Setter en timeout for å unngå "429 Too Many Requests" i consollen https://www.linkedin.com/pulse/nodejs-16-settimeout-asyncawait-igor-gonchar/
+          await new Promise(resolve => setTimeout(resolve, 2000))
 
           const response = await fetch(`https://moviesdatabase.p.rapidapi.com/titles/${imdbid}`, {
             headers: {
@@ -63,7 +64,7 @@ function MovieCard({ movies, type }) {
     } catch (error) {
       console.error(error)
     }
-  };
+  }
 
   return (
     <div>
@@ -89,7 +90,7 @@ function MovieCard({ movies, type }) {
                 </article>
               )}
             </section>
-          );
+          )
         })
       ) : (
         <p>Vennligst vent mens jeg laster meg ferdig..:D</p>
