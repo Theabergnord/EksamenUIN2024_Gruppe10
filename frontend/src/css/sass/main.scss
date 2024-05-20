@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 //Setter variabler som kan gjenbrukes nedover
-$lilla: rgb(107, 45, 157);
-$shadow: rgb(186, 186, 186);
-$pcolor: rgb(199, 255, 183);
+$lilla: rgb(86, 26, 136);
+$shadow: rgb(181, 181, 181);
+$pcolor: rgb(202, 255, 187);
 $scolor: rgb(190, 164, 255);
 $tcolor: rgb(156, 145, 247);
 $black: rgb(0, 0, 0);
@@ -68,7 +68,7 @@ h1 {
 
 h2, h3 {
     font-weight: 400;
-    font-size: 2.2em;
+    font-size: 2em;
     font-family: $stor_font;
     text-transform: uppercase;
     margin: 0 auto;
@@ -78,11 +78,11 @@ h2, h3 {
         padding-left: 65px;
         text-align: left;
     }
-}
 
-h2 a{
-    color: $white;
-    text-decoration: none;
+    a {
+        color: $white;
+        text-decoration: none;
+    }
 }
 
 h4 {
@@ -136,7 +136,7 @@ p, nav {
     transform: translate(1px, 4px);
 }
 
-.movieList h2 {
+.movieList h3 {
     display: block;
     max-width: 100%;
     background-color: $lilla;
@@ -148,6 +148,7 @@ p, nav {
         width: 100%;
         padding: 20px;
         margin-left: 1.5em;
+        font-size: 1.5em;
     }
 
     @media (min-width: 850px) {
@@ -174,7 +175,7 @@ p, nav {
         flex-direction: column;
         max-width: 50%;
         margin: 10px;
-        padding: 1em;
+        padding: 0.5em;
         align-items: center;
         box-sizing: border-box;
     }
@@ -194,10 +195,10 @@ p, nav {
 
     @media (min-width: 650px) {
         width: 15em;
-        height: auto;
+        height: 22em;
         margin-top: 1em;
+        margin-left: 7em;
         box-shadow: 10px 5px 5px $shadow;
-        margin-left: 9em;
     }
 }
 
@@ -211,6 +212,7 @@ ul {
     @media (min-width: 440px) {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        margin-bottom: 3em;
     }
 }
 
