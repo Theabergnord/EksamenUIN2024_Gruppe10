@@ -1,16 +1,10 @@
 .comparison-container {
     display: flex;
-    justify-content: space-between;
-    gap: 1rem; 
-    padding: 1rem; 
+    flex-wrap: wrap; 
+    justify-content: space-around;
   }
   
-  .user-column {
-    flex: 1;
-    margin: 0 10px; 
-  }
-  
-  .user-column h2 {
+.comparison-h2 {
     text-align: center;
-  }
-  
+    padding: 0;
+}
