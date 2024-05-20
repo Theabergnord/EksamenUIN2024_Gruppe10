@@ -5,6 +5,7 @@ import { client } from '../../sanity/client'
 export default function Genre() {
   const { genre } = useParams()
   const [films, setFilms] = useState([])
+  const [movieCount, setMovieCount] = useState(0)
 
   useEffect(() => {
     const getFilmsByGenre = async () => {
@@ -17,6 +18,8 @@ export default function Genre() {
           }`,
           { genre }
         );
+
+        setMovieCount(data.length)
 
         const filmsWithImages = await Promise.all(data.map(async (film) => {
           const response = await fetch(`https://moviesdatabase.p.rapidapi.com/titles/${film.imdbid}`, {
@@ -43,7 +46,7 @@ export default function Genre() {
 
   return (
     <div>
-      <h2>Filmer i sjangeren: {genre}</h2>
+      <h2>Filmer i sjangeren: {genre} ({movieCount})</h2>
       <ul className='movieCard'>
         {films.map((film) => (
           <li key={film.imdbid}>
