@@ -1,33 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { client } from '../../sanity/client';
 
-function MovieCard({ wishlist }) {
-  const [movies, setMovies] = useState([]);
-  const [fetchedImdbIds, setFetchedImdbIds] = useState(new Set()) //Kilde???
+function MovieCard({ movies, type }) {
+  const [movieDetails, setMovieDetails] = useState([]);
+
+  //Kilde: For å unngå at samme film blir hentet flere ganger https://stackoverflow.com/questions/58806883/how-to-use-set-with-reacts-usestate
+  const [fetchedImdb, setFetchedImdb] = useState(new Set())
 
   useEffect(() => {
-    if (!wishlist || wishlist.length === 0) return 
+    if (!movies || movies.length === 0) return 
 
-      // Henter filmer basert på brukerens ønskeliste
+      //Henter filmer fra Sanity basert på id'ene fra IMDB
       const fetchMovies = async () => {
         try {
-          const sanityData = await client.fetch('*[_type == "films" && imdbid in $imdbIds]{ title, genre, imdbid }', { imdbIds: wishlist })
+          const sanityData = await client.fetch('*[_type == "films" && imdbid in $imdbIds]{ title, genre, imdbid }', { imdbIds: movies })
           const imdbIds = sanityData.map(({ imdbid }) => imdbid);
-          const newImdbIds = imdbIds.filter(imdbId => !fetchedImdbIds.has(imdbId))
-          await fetchMovieDataFromAPI(newImdbIds)
+          const newImdbIds = imdbIds.filter(imdbId => !fetchedImdb.has(imdbId))
+          await fetchMovieData(newImdbIds)
         } catch (error) {
-          console.error('Error fetching movie data from Sanity:', error)
+          console.error('Klarte ikke hente filmer')
         }
       }
     
       fetchMovies()
-    }, [wishlist])
+    }, [movies, type])
 
  
-  const fetchMovieDataFromAPI = async (imdbIds) => {
+  const fetchMovieData = async (imdbIds) => {
     try {
       for (const imdbid of imdbIds) {
-        if (fetchedImdbIds.has(imdbid)) {
+        if (fetchedImdb.has(imdbid)) {
           continue;
         }
 
@@ -41,42 +43,42 @@ function MovieCard({ wishlist }) {
             },
           });
 
-          const data = await response.json();
+        const data = await response.json();
         const newMovie = {
           imdbid,
           title: data.results?.titleText?.text,
           year: data.results?.releaseYear?.year,
           genre: '',
           imageUrl: data.results?.primaryImage?.url,
-        };
+        }
 
-        setMovies((prevMovies) => {
+        setMovieDetails((prevMovies) => {
           const movieMap = new Map(prevMovies.map(movie => [movie.imdbid, movie]))
           movieMap.set(newMovie.imdbid, newMovie)
           return Array.from(movieMap.values())
-        });
+        })
 
-        setFetchedImdbIds((prevImdbIds) => new Set([...prevImdbIds, imdbid]))
+        setFetchedImdb((prevImdbIds) => new Set([...prevImdbIds, imdbid]))
       }
     } catch (error) {
-      console.error('Error fetching movie data from API:', error)
+      console.error(error)
     }
   };
 
   return (
     <div>
-      {movies.length > 0 ? (
-        movies.map((movie) => {
+      {movieDetails.length > 0 ? (
+        movieDetails.map((movie) => {
           const hasContent = movie.title || movie.genre || movie.imageUrl;
           return hasContent && (
             <section className="movieCard" key={movie.imdbid}>
               {movie.title && (
                 <article className="movieList">
-                  <h2>
+                  <h3>
                     <a href={`https://www.imdb.com/title/${movie.imdbid}`} target="_blank" rel="noopener noreferrer">
                       {movie.title} ({movie.year})
                     </a>
-                  </h2>
+                  </h3>
                 </article>
               )}
               {movie.imageUrl && (
