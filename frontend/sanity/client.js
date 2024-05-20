@@ -10,7 +10,7 @@ export const client = createClient({
   export const writeClient = createClient({
     projectId: "azakqh08",
     dataset: "production",
-    useCdn: false,
+    useCdn: true,
     apiVersion: "2024-05-02",
-    token: "skz64LV5OvzharZMPgX9k0uWBLpTKHGXfyRHFZ3Qm5eW7aw7CfDkH1tKxRIQ2rcNqAi16JWsi3zN9riwHh3cHIlMUMgqRDMWNCCYkHA0rWH0rG3qU6BROqx1vYit1zDs00WUPjP7MWCOVjiwOYMMTinwrxfHGT4VtmDxY8vGOU26b2lKlxJC"
+    token: "skfcpn7SqPLSodN04ehhmj1sONjordE02VDMM2nY2zCAtA73vZqDrgzxARNnKefDvCtRo4q3v9qhsoMenguD2XqqASsxSXnwAz91Y0pQUcBYLYju4e3b4JVTSACUx2lgaNsYdkQCyxifJi9TgVfogw3SyxZAjx2R2xcH4DQk153BkRdSJBul"
   })

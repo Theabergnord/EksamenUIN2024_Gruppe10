@@ -9,11 +9,6 @@ export const user = {
         type: 'string',
     },
     {
-        title: 'Bilde',
-        name: 'poster',
-        type: 'image',
-    },
-    {
       title: 'Ønskeliste',
       name: 'wishlist',
       type: 'array',
@@ -25,6 +20,12 @@ export const user = {
     name: 'favorites',
     type: 'array',
     of: [{type: 'string'}]
+  },
+  {
+    name: 'favoriteGenres',
+    type: 'array',
+    title: 'Favoritt sjanger',
+    of: [{ type: 'string', to: { type: 'genre' } }]
   }
   ],
 }

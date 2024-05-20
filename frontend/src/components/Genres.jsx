@@ -1,50 +1,72 @@
-import React, { useState, useEffect } from 'react'
-import { client } from '../../sanity/client'
-import { Link } from 'react-router-dom'
-import { FaRegStar } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
+import React, { useState, useEffect } from 'react';
+import { writeClient } from '../../sanity/client';
+import { Link } from 'react-router-dom';
+import { FaRegStar, FaStar } from "react-icons/fa";
+import { useUser } from './UserContext'; 
 
-export default function Genres(){
-  const [genre, setGenre] = useState([])
-  const [favoriteGenres, setFavoritesGenres] = useState([])
+export default function Genres({}) {
+  const { currentUser } = useUser();
+  const [genre, setGenre] = useState([]);
+  const [favoriteGenres, setFavoriteGenres] = useState([]);
 
   useEffect(() => {
     const getGenre = async () => {
       try {
-        const data = await client.fetch('*[_type == "genre"]{ genre}')
-        setGenre(data)
+        const data = await writeClient.fetch('*[_type == "genre"]{ genre}');
+        setGenre(data);
       } catch (error) {
-        console.error('Klarte ikke å hente sjangere', error)
+        console.error('Failed to fetch genres', error);
       }
+    };
+
+    getGenre();
+  }, [favoriteGenres]);
+
+  const handleFavorite = async (selectedGenreName) => {
+    try {
+      const isAlreadyFavorite = favoriteGenres.includes(selectedGenreName);
+  
+      
+      let updatedGenres;
+      if (isAlreadyFavorite) {
+        updatedGenres = favoriteGenres.filter(genre => genre !== selectedGenreName);
+      } else {
+        updatedGenres = [...favoriteGenres, selectedGenreName];
+      }
+      setFavoriteGenres(updatedGenres);
+  
+     
+      const selectedUserId = localStorage.getItem('selectedUserId');
+      const updatedUser = await writeClient.patch(selectedUserId)
+        .set({ favoriteGenres: updatedGenres })
+        .commit(); 
+  
+      console.log("Updated User:", updatedUser);
+    } catch (error) {
+      console.error("Error saving genre:", error);
     }
-
-    getGenre()
-  }, [])
-
-  const handleFavorite = (genre) => {
-    setFavoritesGenres((prevFavorites) => [...prevFavorites, genre])
-  }
-
-
-  return(
+  };
+  
+  
+  
+  return (
     <div className='genre'>
-      <h2>Samleside for sjangere:</h2>
+      <h2>Genre Page:</h2>
       <ul>
-        {genre.map((g) => (
-          <li key={g.genre}>
+        {genre.map((g, index) => (
+          <li key={g._id || index}>
             <Link to={`/genres/${g.genre}`}>{g.genre}</Link>
-
-          {/*Kilde: Hvordan sjekke om knappen er klikket eller ikke https://codedamn.com/news/reactjs/if-else-statements-in-jsx*/}
             <button className='favoriteGenre' onClick={() => handleFavorite(g.genre)}>
               {favoriteGenres.includes(g.genre) ? (
-                <> Favorittsjanger <FaStar className='stjerne'/> </>
+                <> Remove from favorites <FaStar className='stjerne'/> </>
               ) : (
-                <> Legg til som favoritt <FaRegStar className='stjerne'/> </>
+                <> Add to favorites <FaRegStar className='stjerne'/> </>
               )}
             </button>
           </li>
         ))}
       </ul>
     </div>
-  )
+  );
+  
 }

@@ -29,13 +29,11 @@ const AppContent = () => {
 
 function App() {
   return (
-    <>
-      <UserProvider>
-        <Router>
-          <AppContent />
-        </Router>
+    <Router>
+      <UserProvider> 
+        <AppContent />
       </UserProvider>
-    </>
+    </Router>
   );
 }
 
