@@ -2,12 +2,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { client } from "../../sanity/client";
 import { useUser } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Users(){
     const [users, setUsers] = useState([]);
     const { currentUser, setUser } = useUser();
 
-  // Kilde: https://www.sanity.io/docs/js-client
+    //Kilde: useNavigate: https://medium.com/@bobjunior542/using-usenavigate-in-react-router-6-a-complete-guide-46f51403f430 , https://www.geeksforgeeks.org/reactjs-usenavigate-hook/
+    const navigate = useNavigate()
+
+  //Kilde: https://www.sanity.io/docs/js-client
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -21,8 +25,9 @@ export default function Users(){
     getUsers()
   }, [])
 
-  const handleUserSelect = (userId) => {
-    setUser(userId)
+  const handleUserSelect = async (userId) => {
+    await setUser(userId)
+    navigate('/')
   }
 
   const otherUsers = users.filter(user => user._id !== currentUser?._id);
@@ -30,6 +35,7 @@ export default function Users(){
     return(
         <>
          <div>
+          <h2>Logg inn som:</h2>
           <ul>
             {otherUsers.map((user, index) => (
               <li key={index} onClick={() => handleUserSelect(user._id)}>

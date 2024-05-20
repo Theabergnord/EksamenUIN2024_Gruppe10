@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
     }, [])
 
     const fetchUserData = async (userId) => {
-        const query = `*[_type == "user" && _id == $userId]{_id, name}`
+        const query = `*[_type == "user" && _id == $userId]{ _id, name, wishlist }`
         const params = { userId: userId }
         try {
             const users = await client.fetch(query, params);

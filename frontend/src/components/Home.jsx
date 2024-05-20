@@ -4,11 +4,21 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { client } from "../../sanity/client";
 import { useUser } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Home(){
   const [users, setUsers] = useState([]);
-  const { currentUser, setUser } = useUser();
+  const { currentUser } = useUser();
+
+  //Kilde: useNavigate: https://medium.com/@bobjunior542/using-usenavigate-in-react-router-6-a-complete-guide-46f51403f430 , 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!currentUser) {
+      navigate('/users')
+    }
+  }, [currentUser, navigate])
 
   // Kilde: https://www.sanity.io/docs/js-client
   useEffect(() => {
@@ -30,7 +40,7 @@ export default function Home(){
       /* 
       Utseende: Dersom du ønsker kan du endre "se sammen" til aside, dersom den skal ligge på siden istedenfor. Endre sass.*/
         <>
-        <h2>Hei, {currentUser ? currentUser.name : 'gjest'}</h2>
+        <h2>Hei, {currentUser ? currentUser.name : 'Logg inn'}</h2>
 
         <div>
           <h3>Se sammen med:</h3>
@@ -41,17 +51,24 @@ export default function Home(){
           </ul>
         </div>  
 
-        <div>
+        <section className="movieList_container">
+        <div className="movieList_section">
           <h3>Favoritter:</h3>
+          
+          {/*Må byttes ut med favorittliste!!!!!!!!!!!!
+          <MovieCard wishlist={currentUser.wishlist} />*/}
         </div>
-
 
       {/*Overskrift skal inn i div. Må endre på sass slik at det legger seg riktig.*/}
-        <h3>Ønskeliste:</h3>
-        <div className="movieList">
-        <MovieCard/>
-        </div>
-        
+      {currentUser && currentUser.wishlist && currentUser.wishlist.length > 0 && (
+        <>
+          <div className="movieList_section">
+          <h3>Ønskeliste:</h3>
+            <MovieCard wishlist={currentUser.wishlist} /> {/* Sender wishlist som en prop */}
+          </div>
+        </>
+      )}
+      </section>
         </>
     )
 }
