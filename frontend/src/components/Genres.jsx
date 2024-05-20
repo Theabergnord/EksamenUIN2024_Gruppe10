@@ -46,7 +46,7 @@ export default function Genres(){
   };
 
   return(
-    <div className='genre'>
+    <main className='genre'>
       <h2>Samleside for sjangere:</h2>
       <ul>
         {genre.map((g, index) => (
@@ -63,6 +63,6 @@ export default function Genres(){
           </li>
         ))}
       </ul>
-    </div>
+    </main>
   )
 }

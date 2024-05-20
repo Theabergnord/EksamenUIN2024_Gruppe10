@@ -41,9 +41,10 @@ export default function Home() {
 
   return (
     <>
+    <section>
       <h2>Hei, <span className="innlogget_bruker">{currentUser ? currentUser.name : "Logg inn"} <FaRegSmileBeam className="innlogget_ikon"/></span></h2>
 
-      <div>
+      
         <h3>Se sammen med:</h3>
         <ul>
           {otherUsers.map((user) => (
@@ -58,26 +59,26 @@ export default function Home() {
             </Link>
           ))}
         </ul>
-      </div>
+      </section>
 
-      <section className="movieList_container">
+      <main className="movieList_container">
         {currentUser && currentUser.favorites && currentUser.favorites.length > 0 && (
-          <div className="movieList_section">
+          <section className="movieList_section">
             <h3>Favoritter:</h3>
             <MovieCard movies={currentUser.favorites} type="favorites" />
             {/* Sender favorites som en prop */}
-          </div>
+          </section>
         )}
 
         {/*Overskrift skal inn i div. Må endre på sass slik at det legger seg riktig.*/}
         {currentUser && currentUser.wishlist && currentUser.wishlist.length > 0 && (
-          <div className="movieList_section">
+          <section className="movieList_section">
             <h3>Ønskeliste:</h3>
             <MovieCard movies={currentUser.wishlist} type="wishlist" />
             {/* Sender wishlist som en prop */}
-          </div>
+          </section>
         )}
-      </section>
+      </main>
     </>
   );
 }

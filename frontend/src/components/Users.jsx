@@ -34,7 +34,7 @@ export default function Users(){
     
     return(
         <>
-         <div>
+         <main>
           <h2>Logg inn som:</h2>
           <ul>
             {otherUsers.map((user, index) => (
@@ -42,7 +42,7 @@ export default function Users(){
                 {user.name}</li>
             ))}
           </ul>
-        </div>  
+        </main>  
         </>
     )
 }

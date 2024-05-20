@@ -71,7 +71,7 @@ function Comparison() {
   const noMatch = () => <p>Dere har ingen filmer til felles her..</p>;
 
   return (
-    <div className="comparison-container">
+    <main className="comparison-container">
       <h2 className='comparison-h2'>Utvalgte filmer for {currentUser.name} og {selectedUser.name}</h2>
       <section className="user-column">
         <h3>Catch up!</h3>
@@ -89,7 +89,7 @@ function Comparison() {
           noMatch()
         )}
       </section>
-    </div>
+    </main>
   );
 }
 

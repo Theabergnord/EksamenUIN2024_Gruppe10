@@ -67,35 +67,31 @@ function MovieCard({ movies, type }) {
   }
 
   return (
-    <div>
+  <>
       {movieDetails.length > 0 ? (
         movieDetails.map((movie) => {
           const hasContent = movie.title || movie.genre || movie.imageUrl;
           return hasContent && (
-            <section className="movieCard" key={movie.imdbid}>
+            <article className="movieCard" key={movie.imdbid}>
               {movie.title && (
-                <article className="movieList">
                   <h3>
                     <a href={`https://www.imdb.com/title/${movie.imdbid}`} target="_blank" rel="noopener noreferrer">
                       {movie.title} ({movie.year})
                     </a>
                   </h3>
-                </article>
               )}
               {movie.imageUrl && (
-                <article className="movieCard">
                   <a href={`https://www.imdb.com/title/${movie.imdbid}`} target="_blank" rel="noopener noreferrer">
                     <img src={movie.imageUrl} alt={movie.title} />
                   </a>
-                </article>
               )}
-            </section>
+            </article>
           )
         })
       ) : (
         <p>Vennligst vent mens jeg laster meg ferdig..:D</p>
       )}
-    </div>
+  </>
   );
 }
 
