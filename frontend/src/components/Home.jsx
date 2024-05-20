@@ -51,17 +51,24 @@ export default function Home(){
           </ul>
         </div>  
 
-        <div>
+        <section className="movieList_container">
+        <div className="movieList_section">
           <h3>Favoritter:</h3>
+          
+          {/*Må byttes ut med favorittliste!!!!!!!!!!!!*/}
+          <MovieCard wishlist={currentUser.wishlist} />
         </div>
-
 
       {/*Overskrift skal inn i div. Må endre på sass slik at det legger seg riktig.*/}
-        <h3>Ønskeliste:</h3>
-        <div className="movieList">
-        <MovieCard/>
-        </div>
-        
+      {currentUser && currentUser.wishlist && currentUser.wishlist.length > 0 && (
+        <>
+          <div className="movieList_section">
+          <h3>Ønskeliste:</h3>
+            <MovieCard wishlist={currentUser.wishlist} /> {/* Sender wishlist som en prop */}
+          </div>
+        </>
+      )}
+      </section>
         </>
     )
 }

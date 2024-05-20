@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 //Setter variabler som kan gjenbrukes nedover
-$font_color: rgb(107, 45, 157);
+$lilla: rgb(107, 45, 157);
 $shadow: rgb(186, 186, 186);
 $pcolor: rgb(199, 255, 183);
 $scolor: rgb(190, 164, 255);
@@ -27,7 +27,7 @@ header {
     display: block;
     align-items: center;
     justify-content: space-between;
-    color: $font_color;
+    color: $lilla;
 
     @media (min-width: 650px) {
         display: flex;
@@ -53,7 +53,7 @@ nav a {
 h1 {
     font-family: $stor_font;
     font-weight: 900;
-    color: $font_color;
+    color: $lilla;
     margin: 0 auto;
     font-size: 70px;
     padding: 50px;
@@ -117,7 +117,7 @@ p, nav {
     padding: 5px 15px;
     height: 35px;
     width: 40%;
-    background-color: $font_color;
+    background-color: $lilla;
     color: $white;
 
     @media (min-width: 650px) {
@@ -126,7 +126,7 @@ p, nav {
         font-weight: 500;
         color: $white;
         padding: 0.2em;
-        background-color: $font_color;
+        background-color: $lilla;
         border-radius: 9px;
     }
 }
@@ -136,28 +136,43 @@ p, nav {
     transform: translate(1px, 4px);
 }
 
-.movieList {
+.movieList h2 {
     display: block;
-    flex-wrap: wrap;
     max-width: 100%;
+    background-color: $lilla;
+    border-radius: 9px;
+
+    @media (min-width: 650px) {
+        display: flex;
+        max-width: 100%;
+        width: 100%;
+        padding: 20px;
+        margin-left: 1.5em;
+    }
 
     @media (min-width: 850px) {
-        display: flex;
-        max-width: 50%;
-        padding: 25px;
-        margin-left: 20px;
-        align-items: flex-start;
+        max-width: 100%;
     }
 }
 
+.movieList_container{
+    display: flex;
+    flex-wrap: wrap;
+    flex:1;
+    
+}
+
+.movieList_section{
+    padding: 1em;
+    box-sizing: border-box;
+}
+
 .movieCard {
-    display: block;
-    padding: 2em;
 
     @media (min-width: 650px) {
         display: flex;
         flex-direction: column;
-        max-width: 40%;
+        max-width: 50%;
         margin: 10px;
         padding: 1em;
         align-items: center;
@@ -165,7 +180,7 @@ p, nav {
     }
 
     @media (min-width: 850px) {
-        max-width: 100%;
+        max-width: 50%;
     }
 }
 
@@ -182,6 +197,7 @@ p, nav {
         height: auto;
         margin-top: 1em;
         box-shadow: 10px 5px 5px $shadow;
+        margin-left: 9em;
     }
 }
 
@@ -202,7 +218,7 @@ li {
     text-align: center;
     font-family: $liten_font;
     font-size: 1.1em;
-    background-color: $font-color;
+    background-color: $lilla;
     color: $white;
     width: 70%;
     height: 90%;
