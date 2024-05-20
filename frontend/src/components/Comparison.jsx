@@ -74,7 +74,7 @@ function Comparison() {
     <div className="comparison-container">
       <h2 className='comparison-h2'>Utvalgte filmer for {currentUser.name} og {selectedUser.name}</h2>
       <section className="user-column">
-        <h3>Felles ønskeliste</h3>
+        <h3>Catch up!</h3>
         {commonWishlist.length > 0 ? (
           <MovieCard movies={commonWishlist} />
         ) : (
@@ -82,7 +82,7 @@ function Comparison() {
         )}
       </section>
       <section className="user-column">
-        <h3>Felles favoritter</h3>
+        <h3>Go safe!</h3>
         {commonFavorites.length > 0 ? (
           <MovieCard movies={commonFavorites} />
         ) : (
