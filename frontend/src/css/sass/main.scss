@@ -73,6 +73,9 @@ h2, h3 {
     text-transform: uppercase;
     margin: 0 auto;
     text-align: center;
+    margin-top: 1em;
+    margin-bottom: 0.2em;
+    width: 80%;
 
     @media (min-width: 650px) {
         padding-left: 65px;
@@ -187,7 +190,7 @@ p, nav {
 
 .movieCard img {
     display: block;
-    width: 100%;
+    width: 80%;
     height: auto;
     margin-top: 1em;
     margin: 0 auto;
