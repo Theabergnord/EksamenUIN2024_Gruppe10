@@ -37,9 +37,9 @@ export default function Genres(){
           {/*Kilde: Hvordan sjekke om knappen er klikket eller ikke https://codedamn.com/news/reactjs/if-else-statements-in-jsx*/}
             <button className='favoriteGenre' onClick={() => handleFavorite(g.genre)}>
               {favoriteGenres.includes(g.genre) ? (
-                <> Favorittsjanger <FaStar className='stjerne'/> </>
+                <> Favorittsjanger <FaStar /> </>
               ) : (
-                <> Legg til som favoritt <FaRegStar className='stjerne'/> </>
+                <> Legg til som favoritt <FaRegStar /> </>
               )}
             </button>
           </li>
