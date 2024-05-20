@@ -181,6 +181,7 @@ p, nav {
 }
 
 .movieCard {
+    width: 100%;
 
     @media (min-width: 650px) {
         display: flex;
@@ -306,6 +307,7 @@ a {
     align-items: center;
     justify-content: center;
     border: 1px solid $lilla;
+    
     }
-
+    
   @import 'comparison';
