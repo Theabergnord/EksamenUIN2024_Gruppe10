@@ -24,51 +24,45 @@ function Comparison() {
         //https://www.w3schools.com/jsref/jsref_find.asp
 
         if (!selectedUserName) {
-          console.error('Selected user name not found in the URL');
+          console.error('Selected user name not found in the URL')
           return;
         }
         
-        const userInfo = `
-          *[_type == "user" && name == $userName]{ 
-            _id, 
-            name, 
-            wishlist,
-            favorites
-          }
-        `;
+        const userInfo = `*[_type == "user" && name == $userName]{ _id, name, wishlist, favorites }`
         const name = { userName: selectedUserName };
 
         setFetching(true);
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        //Kilde: https://www.linkedin.com/pulse/nodejs-16-settimeout-asyncawait-igor-gonchar/ , https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
         const users = await client.fetch(userInfo, name);
 
         if (users.length > 0) {
           setSelectedUser(users[0]);
           // filter for å finne felles ønskeliste filmer
-          const commonWishlist = currentUser.wishlist.filter(movie => users[0].wishlist.includes(movie));
-          setCommonWishlist(commonWishlist);
+          const commonWishlist = currentUser.wishlist.filter(movie => users[0].wishlist.includes(movie))
+          setCommonWishlist(commonWishlist)
+          
           // filter for å finne felles favorittfilmer
-          const commonFavorites = currentUser.favorites.filter(movie => users[0].favorites.includes(movie));
-          setCommonFavorites(commonFavorites);
+          const commonFavorites = currentUser.favorites.filter(movie => users[0].favorites.includes(movie))
+          setCommonFavorites(commonFavorites)
         } 
 
-      } finally {
-        setLoading(false);
-        setFetching(false);
-      }
-      //https://stackoverflow.com/questions/44251851/using-an-else-if-statement-with-in-a-try-catch-finally
-    };
+        } finally {
+          setLoading(false);
+          setFetching(false);
+        }
+        //https://stackoverflow.com/questions/44251851/using-an-else-if-statement-with-in-a-try-catch-finally
+    }
 
-    fetchSelectedUser();
-  }, [userNames, currentUser, fetching]); 
+        fetchSelectedUser();
+      }, [userNames, currentUser, fetching]) 
 
-  if (loading) return <p>Laster...</p>;
+      if (loading) return <p>Laster...</p>
 
-  // Melding hvis ingen filmer matcher
-  const noMatch = () => <p>Dere har ingen filmer til felles her..</p>;
+      // Melding hvis ingen filmer matcher
+      const noMatch = () => <p>Dere har ingen filmer til felles her..</p>
 
   return (
     <main className="comparison-container">
