@@ -55,8 +55,8 @@ export default function Home(){
         <div className="movieList_section">
           <h3>Favoritter:</h3>
           
-          {/*Må byttes ut med favorittliste!!!!!!!!!!!!*/}
-          <MovieCard wishlist={currentUser.wishlist} />
+          {/*Må byttes ut med favorittliste!!!!!!!!!!!!
+          <MovieCard wishlist={currentUser.wishlist} />*/}
         </div>
 
       {/*Overskrift skal inn i div. Må endre på sass slik at det legger seg riktig.*/}
