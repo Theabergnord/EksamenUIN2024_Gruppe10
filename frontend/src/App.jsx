@@ -8,6 +8,7 @@ import Comparison from './components/Comparison';
 import { UserProvider } from './components/UserContext';
 import { useLocation } from 'react-router-dom';
 import './css/sass/main.scss';
+import Footer from './components/Footer';
 
 const AppContent = () => {
   let location = useLocation();
@@ -15,7 +16,7 @@ const AppContent = () => {
   return (
     <>
       {/*Dersom man er på Users-siden skal ikke Header synes*/}
-      {location.pathname !== '/users' && <Header />}
+      {location.pathname !== '/users' && <Header /> }
       <Routes>
         <Route path='/users' element={<Users />} />
         <Route path='/' element={<Home />} />
@@ -23,6 +24,8 @@ const AppContent = () => {
         <Route path='/genres/:genre' element={<Genre />} />
         <Route path='/comparison/:userNames' element={<Comparison />} />
       </Routes>
+      {location.pathname !== '/users' && <Footer /> }
+      
     </>
   );
 }
