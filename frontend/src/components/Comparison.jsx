@@ -14,6 +14,7 @@ function Comparison() {
   const [commonFavorites, setCommonFavorites] = useState([]);
   const [commonGenres, setCommonGenres] = useState([]);
   const [fetching, setFetching] = useState(false);
+  //Fått hjelp med debouncedFetch fra chatgpt. prompts lenger ned i koden hvor dette blir brukt
   const [debouncedFetch, setDebouncedFetch] = useState(null);
 
   useEffect(() => {
@@ -86,8 +87,6 @@ function Comparison() {
 
   return (
     <main className="comparison-container">
-      <h2 className='comparison-h2'>Utvalgte filmer for {currentUser.name} og {selectedUser.name}</h2>
-    <div className="comparison-container">
       <h2 className='comparison-h2'>Utvlagte filmer og sjangre for {currentUser.name} og {selectedUser?.name}</h2>
       <section className="user-column">
         <h3>Catch up!</h3>
@@ -124,7 +123,7 @@ function Comparison() {
           noMatch()
         )}
       </section>
-    </div>
+    </main>
   );
 }
 
