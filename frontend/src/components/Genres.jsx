@@ -40,8 +40,6 @@ export default function Genres(){
       const updatedUser = await writeClient.patch(selectedUserId)
       .set({ favoriteGenres: updatedGenres})
       .commit();
-
-      console.log("Oppdatert bruker:", updatedUser);
     } catch (error) {
       console.error("Error ved lagring av sjanger", error)
     }
