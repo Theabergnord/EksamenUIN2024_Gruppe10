@@ -1,0 +1,19 @@
+.Hjem_side {
+    display: inline;
+    border-radius: 20px;
+    padding: 5px 15px;
+    height: 35px;
+    width: 40%;
+    background-color: $lilla;
+    color: $white;
+
+    @media (min-width: 650px) {
+        text-align: left;
+        font-family: $liten_font;
+        font-weight: 500;
+        color: $white;
+        padding: 0.2em;
+        background-color: $lilla;
+        border-radius: 9px;
+    }
+}

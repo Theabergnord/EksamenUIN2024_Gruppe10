@@ -1,0 +1,95 @@
+
+header {
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    color: $lilla;
+
+    @media (min-width: 650px) {
+        display: flex;
+    }
+}
+
+header a {
+    text-decoration: none;
+    padding-top: 20px;
+}
+
+nav a {
+    display: block;
+    padding: 1em;
+    font-weight: 00;
+
+    @media (min-width: 942px) {
+        display: inline;
+        cursor: pointer;
+    }
+}
+
+h1 {
+    font-family: $stor_font;
+    font-weight: 900;
+    color: $lilla;
+    margin: 0 auto;
+    font-size: 70px;
+    padding: 50px;
+    text-shadow: 10px 5px 5px $shadow;
+    text-align: center;
+
+    @media (min-width: 650px) {
+        margin: 0;
+        margin-left: 15px;
+    }
+}
+
+h2, h3 {
+    font-weight: 400;
+    font-size: 2em;
+    font-family: $stor_font;
+    text-transform: uppercase;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 0.2em;
+    width: 80%;
+
+    @media (min-width: 783px) {
+        margin-left: 70px;
+        text-align: left;
+    }
+
+    a {
+        color: $white;
+        text-decoration: none;
+    }
+
+    @media (max-width: 783px) {
+        text-align: center;
+    }
+}
+
+h4 {
+    font-weight: 400;
+    font-size: 1.4em;
+    font-family: $stor_font;
+    text-transform: uppercase;
+    margin: 0 auto;
+
+    @media (min-width: 650px) {
+        margin: 0;
+    }
+}
+
+p, nav {
+    text-align: center;
+    font-family: $liten_font;
+    font-size: 1.1em;
+    padding: 50px;
+
+    @media (min-width: 960px) {
+        text-align: center;
+        word-wrap: break-word;
+        padding: 25px;
+        margin-right: 25px;
+    }
+}

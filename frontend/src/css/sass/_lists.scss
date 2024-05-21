@@ -1,0 +1,61 @@
+ul {
+    list-style: none;
+    margin: 0 auto;
+    display: inline;
+    justify-content: center;
+    max-width: 100%;
+
+    @media (min-width: 440px) {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        margin-bottom: 3em;
+    }
+}
+
+//Kilde sirkel: https://www.w3schools.com/howto/howto_css_circles.asp
+li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: $liten_font;
+    font-size: 1.1em;
+    background-color: $lilla;
+    color: $white;
+    width: 6em;
+    height: 6em;
+    border-radius: 50%;
+    margin: 0.2em auto;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $white;
+        color: $lilla;
+    }
+
+    @media (min-width: 650px) {
+    width: 8em;
+    height: 8em;
+    }
+}
+
+li.users {
+        text-align: center;
+        font-family: $liten_font;
+        font-size: 1.1em;
+        background-color: $lilla;
+        color: $white;
+        width: 60%;
+        height: 1.8em;
+        border-radius: 6px;
+        margin: 0.2em auto;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $white;
+            color: $lilla;
+            transition-duration: 0.3s;
+            }
+}

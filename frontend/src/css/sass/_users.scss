@@ -1,0 +1,32 @@
+.innlogget_bruker{
+    color: $lilla;
+}
+
+li.users {
+    text-align: center;
+    font-family: $liten_font;
+    font-size: 1.1em;
+    background-color: $lilla;
+    color: $white;
+    width: 60%;
+    height: 1.8em;
+    border-radius: 6px;
+    margin: 0.2em auto;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $white;
+        color: $lilla;
+        transition-duration: 0.3s;
+        }
+}
+
+.username {
+color: $white;
+text-decoration: none;
+}
+
+a {
+text-decoration: none;
+}
