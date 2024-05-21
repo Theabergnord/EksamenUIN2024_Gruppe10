@@ -12,11 +12,7 @@ export default function Genre() {
     const filmGenre = async () => {
       try {
         const data = await client.fetch(
-          `*[_type == "films" && genre == $genre]{
-            title,
-            genre,
-            imdbid
-          }`,
+          `*[_type == "films" && genre == $genre]{ title, genre, imdbid }`,
           { genre }
         );
 
