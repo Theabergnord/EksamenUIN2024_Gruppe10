@@ -78,6 +78,21 @@ export default function Home() {
             {/* Sender wishlist som en prop */}
           </section>
         )}
+        {currentUser && currentUser.favoriteGenres && currentUser.favoriteGenres.length > 0 && (
+          <section className="movieList_section">
+            <h3>Favorittsjanger:</h3>
+            <ul className="genrelist">
+          {currentUser.favoriteGenres.map((genre, index) => (
+            <Link className='genrecomparison' key={index} to={`/genres/${genre}`}>
+              <li>
+                {genre}
+              </li>
+            </Link>
+          ))}
+        </ul>
+            {/* Sender favoriteGenre som en prop */}
+          </section>
+        )}
       </main>
     </>
   );

@@ -10,17 +10,3 @@
     text-shadow: 10px 5px 5px $shadow;
 }
 
-.genrecomparison {
-  color: $white;
-  font-size: $liten_font;
-  text-decoration: none;
-
-  a{
-    text-decoration: none;
-  }
-
-  &:hover{
-    text-decoration: underline;
-  }
-}
-
