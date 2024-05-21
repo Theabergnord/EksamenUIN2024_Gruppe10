@@ -88,7 +88,7 @@ function Comparison() {
       <h2 className='comparison-h2'>Utvlagte filmer og sjangre for {currentUser.name} og {selectedUser?.name}</h2>
       <section className="user-column">
         <h3>Catch up!</h3>
-        <p>Dere har disse filmene til felles i ønskelisten</p>
+        <p>Dere begge ønsker å se disse filmene</p>
         {commonWishlist.length > 0 ? (
           <MovieCard movies={commonWishlist} />
         ) : (
@@ -97,7 +97,7 @@ function Comparison() {
       </section>
       <section className="user-column">
         <h3>Go safe!</h3>
-        <p>Dere har disse filmene som felles favoritter</p>
+        <p>Hva med en god favoritt for dere to?</p>
         {commonFavorites.length > 0 ? (
           <MovieCard movies={commonFavorites} />
         ) : (
@@ -106,7 +106,7 @@ function Comparison() {
       </section>
       <section className="user-column">
         <h3>Utforsk</h3>
-        <p>Dere liker begge disse sjangerene</p>
+        <p>Dere liker begge disse sjangerene, noe å velge her?</p>
         {commonGenres.length > 0 ? (
           <ul>
           {commonGenres.map((genre, index) => (
