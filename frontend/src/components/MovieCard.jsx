@@ -53,6 +53,8 @@ function MovieCard({ movies, type }) {
           imageUrl: data.results?.primaryImage?.url,
         }
 
+        //Oppdaterer liste over filmer for å unngå å få dobbelt opp. Kilde til Map, Array og set.: https://playcode.io/javascript/map-set , https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+
         setMovieDetails((prevMovies) => {
           const movieMap = new Map(prevMovies.map(movie => [movie.imdbid, movie]))
           movieMap.set(newMovie.imdbid, newMovie)
