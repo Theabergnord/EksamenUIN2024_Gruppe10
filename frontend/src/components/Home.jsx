@@ -70,7 +70,7 @@ export default function Home() {
           </section>
         )}
 
-        {/*Overskrift skal inn i div. Må endre på sass slik at det legger seg riktig.*/}
+        
         {currentUser && currentUser.wishlist && currentUser.wishlist.length > 0 && (
           <section className="movieList_section">
             <h3>Ønskeliste:</h3>
