@@ -12,11 +12,7 @@ export default function Genre() {
     const filmGenre = async () => {
       try {
         const data = await client.fetch(
-          `*[_type == "films" && genre == $genre]{
-            title,
-            genre,
-            imdbid
-          }`,
+          `*[_type == "films" && genre == $genre]{ title, genre, imdbid }`,
           { genre }
         );
 
@@ -33,9 +29,9 @@ export default function Genre() {
   }, [genre])
 
   return (
-    <div>
+    <main>
       <h2>Filmer i sjangeren: {genre} ({movieCount})</h2>
       <MovieCard movies={films} type="genre" />
-    </div>
+    </main>
   )
 }

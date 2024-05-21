@@ -1,13 +1,15 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { client } from "../../sanity/client";
 
+//Kilde på UserContext: https://medium.com/@liv_blogs/how-to-implement-user-switching-7cf0713bff65 , https://www.back4app.com/docs/react/working-with-users/get-current-user-react
 const UserContext = createContext(null)
 
 export const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null)
 
     /*En bruker blir lagret i localStorage når man logger den inn. Må slette bruker id'en i
-    Application for å få opp alle tre etter første innlogging, og deretter refreshe.*/
+    Application for å få opp alle tre etter første innlogging, og deretter refreshe.
+    https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications */
     useEffect(() => {
         const loadCurrentUser = async () => {
             const savedUserId = localStorage.getItem('selectedUserId')

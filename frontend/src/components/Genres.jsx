@@ -12,7 +12,7 @@ export default function Genres(){
   useEffect(() => {
     const getGenre = async () => {
       try {
-        const data = await writeClient.fetch('*[_type == "genre"]{ genre}')
+        const data = await writeClient.fetch('*[_type == "genre"]{ genre }')
         setGenre(data);
       } catch (error) {
         console.error('Klarte ikke å hente sjangere', error)
@@ -35,6 +35,8 @@ export default function Genres(){
       setFavoritesGenres(updatedGenres);
 
       const selectedUserId = localStorage.getItem('selectedUserId');
+
+      //Bruker writeClient.patch() for å oppdatere dokumentet i Sanity med favorittsjangre. Kilde: https://webtricks.blog/oppdatere-et-array-felt-i-en-innholdstype-i-sanity-fra-et-react-grensesnitt/ , https://playcode.io/javascript/map-set
       const updatedUser = await writeClient.patch(selectedUserId)
       .set({ favoriteGenres: updatedGenres})
       .commit();
@@ -46,13 +48,14 @@ export default function Genres(){
   };
 
   return(
-    <div className='genre'>
+    <main className='genre'>
       <h2>Samleside for sjangere:</h2>
       <ul>
         {genre.map((g, index) => (
           <li key={g._id || index}>
             <Link to={`/genres/${g.genre}`}>{g.genre}</Link>
-            {/*Kilde: Hvordan sjekke om knappen er klikket eller ikke https://codedamn.com/news/reactjs/if-else-statements-in-jsx*/}
+
+            {/*Kilde: Hvordan sjekke om knappen er klikket eller ikke og hvilken tekst som skal vises https://codedamn.com/news/reactjs/if-else-statements-in-jsx*/}
             <button className='favoriteGenre' onClick={() => handleFavorite(g.genre)}>
               {favoriteGenres.includes(g.genre) ? (
                 <> Fjern fra favoritter <FaStar /> </>
@@ -63,6 +66,6 @@ export default function Genres(){
           </li>
         ))}
       </ul>
-    </div>
+    </main>
   )
 }

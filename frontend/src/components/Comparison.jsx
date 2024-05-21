@@ -24,7 +24,7 @@ function Comparison() {
         const selectedUserName = names.find(name => name !== currentUser.name);
 
         if (!selectedUserName) {
-          console.error('Selected user name not found in the URL');
+          console.error('Selected user name not found in the URL')
           return;
         }
         
@@ -65,6 +65,7 @@ function Comparison() {
         setFetching(false);
       }
     };
+    //https://stackoverflow.com/questions/44251851/using-an-else-if-statement-with-in-a-try-catch-finally
 
      //Fått hjelp fra chatGPT med å bruke debounce.. prompt: "Do you have any suggestion to avoid too many fetches?" svar: ///*Debounce fetchSelectedUser function const timeoutId = setTimeout(fetchSelectedUser, 1000); return () => clearTimeout(timeoutId); }, [userNames, currentUser, fetching]); useEffect(() => { // Trigger a new fetch operation whenever userNames or currentUser changes if (userNames !== debouncedFetch) { setDebouncedFetch(userNames); } }, [userNames, debouncedFetch]);/*
     const timeoutId = setTimeout(fetchSelectedUser, 1000);
@@ -84,6 +85,8 @@ function Comparison() {
   const noMatch = () => <p>Dere har ingenting til felles her...</p>;
 
   return (
+    <main className="comparison-container">
+      <h2 className='comparison-h2'>Utvalgte filmer for {currentUser.name} og {selectedUser.name}</h2>
     <div className="comparison-container">
       <h2 className='comparison-h2'>Utvlagte filmer og sjangre for {currentUser.name} og {selectedUser?.name}</h2>
       <section className="user-column">
