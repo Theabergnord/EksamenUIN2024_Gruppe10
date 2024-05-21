@@ -69,7 +69,7 @@ function Comparison() {
     //https://stackoverflow.com/questions/44251851/using-an-else-if-statement-with-in-a-try-catch-finally
 
      //Fått hjelp fra chatGPT med å bruke debounce.. prompt: "Do you have any suggestion to avoid too many fetches?" svar: ///*Debounce fetchSelectedUser function const timeoutId = setTimeout(fetchSelectedUser, 1000); return () => clearTimeout(timeoutId); }, [userNames, currentUser, fetching]); useEffect(() => { // Trigger a new fetch operation whenever userNames or currentUser changes if (userNames !== debouncedFetch) { setDebouncedFetch(userNames); } }, [userNames, debouncedFetch]);/*
-    const timeoutId = setTimeout(fetchSelectedUser, 1000);
+    const timeoutId = setTimeout(fetchSelectedUser, 2000);
     return () => clearTimeout(timeoutId);
 
   }, [userNames, currentUser, fetching]); 

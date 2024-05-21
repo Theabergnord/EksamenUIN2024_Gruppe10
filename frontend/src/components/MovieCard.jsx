@@ -44,6 +44,7 @@ function MovieCard({ movies, type }) {
             },
           });
 
+        //Fått hjelp fra ChatGPT til forslag for hvordan hente data fra API og lagre dataen i en variabel. Prompts ligger i refleksjonsdokument.
         const data = await response.json();
         const newMovie = {
           imdbid,
@@ -54,7 +55,6 @@ function MovieCard({ movies, type }) {
         }
 
         //Oppdaterer liste over filmer for å unngå å få dobbelt opp. Kilde til Map, Array og set.: https://playcode.io/javascript/map-set , https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
-
         setMovieDetails((prevMovies) => {
           const movieMap = new Map(prevMovies.map(movie => [movie.imdbid, movie]))
           movieMap.set(newMovie.imdbid, newMovie)
