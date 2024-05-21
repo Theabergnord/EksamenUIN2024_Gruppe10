@@ -21,7 +21,7 @@ html, body {
     background-image: linear-gradient($pcolor, $scolor);
 
     @media (min-width: 850px) {
-        background-image: linear-gradient(t$pcolor, $scolor);
+        background-image: linear-gradient($pcolor, $scolor);
     }
 }
 
@@ -243,7 +243,13 @@ li {
     height: 6em;
     border-radius: 50%;
     margin: 0.2em auto;
+    transition: 0.3s;
     cursor: pointer;
+
+    &:hover {
+        background-color: $white;
+        color: $lilla;
+    }
 
     @media (min-width: 650px) {
     width: 8em;
@@ -258,11 +264,17 @@ li.users {
         background-color: $lilla;
         color: $white;
         width: 60%;
-        height: 1.5em;
+        height: 1.8em;
         border-radius: 6px;
         margin: 0.2em auto;
         text-decoration: none;
         cursor: pointer;
+
+        &:hover {
+            background-color: $white;
+            color: $lilla;
+            transition-duration: 0.3s;
+            }
 }
 
 .username {
@@ -322,5 +334,9 @@ a {
     }
 
 
+    footer{
+        text-align: center;
+        margin-top: 3em;
+    }
     
   @import 'comparison';
