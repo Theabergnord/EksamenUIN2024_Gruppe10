@@ -293,6 +293,16 @@ a {
           color: white; 
           text-decoration: none;
         }
+
+        &:hover {
+            background-color: $white;
+        }
+
+        &:hover a{
+            background-color: $white;
+            color: $lilla;
+            transition-duration: 0.3s;
+        }
       }
     }
   }
@@ -306,8 +316,11 @@ a {
     height: 3.7em;
     align-items: center;
     justify-content: center;
+    background-color: $white;
     border: 1px solid $lilla;
-    
+    cursor: pointer;
     }
+
+
     
   @import 'comparison';
