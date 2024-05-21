@@ -31,7 +31,9 @@ export default function Genre() {
   return (
     <main>
       <h2>Filmer i sjangeren: {genre} ({movieCount})</h2>
+      <article className='genreCard'>
       <MovieCard movies={films} type="genre" />
+      </article>
     </main>
   )
 }

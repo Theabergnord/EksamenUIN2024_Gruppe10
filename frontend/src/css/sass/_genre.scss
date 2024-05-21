@@ -70,3 +70,40 @@
     border: 1px solid $lilla;
     cursor: pointer;
     }
+
+        .genreCard {
+            display: grid;
+            align-content: space-between;
+            justify-content: center;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust min width as needed */
+            grid-gap: 20px; /* Adjust gap as needed */
+        }
+        
+        /* Media query to ensure at least 2 columns */
+        @media (max-width: 1400px) {
+            .genreCard {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+        
+        .genreCard h3 {
+            text-align: center;
+        }
+    
+    .genreCard img {
+        display: block;
+        width: 80%;
+        height: auto;
+        margin-top: 1em;
+        margin: 0 auto;
+        box-shadow: 10px 5px 5px $shadow;
+    
+        @media (min-width: 650px) {
+            width: 15em;
+            height: 22em;
+            margin-top: 1em;
+            margin-left: 7em;
+            box-shadow: 10px 5px 5px $shadow;
+        }
+    }
+    
