@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { client } from '../../sanity/client';
 import { useUser } from './UserContext';
+import { Link } from 'react-router-dom';
 import MovieCard from './MovieCard';
 
 function Comparison() {
@@ -11,17 +12,16 @@ function Comparison() {
   const [loading, setLoading] = useState(true);
   const [commonWishlist, setCommonWishlist] = useState([]);
   const [commonFavorites, setCommonFavorites] = useState([]);
+  const [commonGenres, setCommonGenres] = useState([]);
   const [fetching, setFetching] = useState(false);
+  const [debouncedFetch, setDebouncedFetch] = useState(null);
 
   useEffect(() => {
     if (!currentUser || fetching) return; 
     const fetchSelectedUser = async () => {
       try {
-        //.split for å dele opp userNames fra url'en
-        const nameParts = userNames.split('_');
-
-        const selectedUserName = nameParts.find(name => name !== currentUser.name);
-        //https://www.w3schools.com/jsref/jsref_find.asp
+        const names = userNames.split('_');
+        const selectedUserName = names.find(name => name !== currentUser.name);
 
         if (!selectedUserName) {
           console.error('Selected user name not found in the URL');
@@ -33,48 +33,62 @@ function Comparison() {
             _id, 
             name, 
             wishlist,
-            favorites
+            favorites,
+            favoriteGenres
           }
         `;
         const name = { userName: selectedUserName };
 
         setFetching(true);
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-
         const users = await client.fetch(userInfo, name);
 
         if (users.length > 0) {
           setSelectedUser(users[0]);
-          // filter for å finne felles ønskeliste filmer
+
+          // Filter for å finne felles ønskeliste
+          //.includes method: https://www.tutorialspoint.com/filter-array-with-filter-and-includes-in-javascript
           const commonWishlist = currentUser.wishlist.filter(movie => users[0].wishlist.includes(movie));
           setCommonWishlist(commonWishlist);
-          // filter for å finne felles favorittfilmer
+
+          // Filter for å finne felles favorittfilmer
           const commonFavorites = currentUser.favorites.filter(movie => users[0].favorites.includes(movie));
           setCommonFavorites(commonFavorites);
+
+          // Filter for å finne felles favorittsjanger
+          const commonGenres = currentUser.favoriteGenres && users[0].favoriteGenres ? currentUser.favoriteGenres.filter(genre => users[0].favoriteGenres.includes(genre)) : [];
+          setCommonGenres(commonGenres);
         } 
 
       } finally {
         setLoading(false);
         setFetching(false);
       }
-      //https://stackoverflow.com/questions/44251851/using-an-else-if-statement-with-in-a-try-catch-finally
     };
 
-    fetchSelectedUser();
+     //Fått hjelp fra chatGPT med å bruke debounce.. prompt: "Do you have any suggestion to avoid too many fetches?" svar: ///*Debounce fetchSelectedUser function const timeoutId = setTimeout(fetchSelectedUser, 1000); return () => clearTimeout(timeoutId); }, [userNames, currentUser, fetching]); useEffect(() => { // Trigger a new fetch operation whenever userNames or currentUser changes if (userNames !== debouncedFetch) { setDebouncedFetch(userNames); } }, [userNames, debouncedFetch]);/*
+    const timeoutId = setTimeout(fetchSelectedUser, 1000);
+    return () => clearTimeout(timeoutId);
+
   }, [userNames, currentUser, fetching]); 
+
+  useEffect(() => {
+    if (userNames !== debouncedFetch) {
+      setDebouncedFetch(userNames);
+    }
+  }, [userNames, debouncedFetch]);
 
   if (loading) return <p>Laster...</p>;
 
   // Melding hvis ingen filmer matcher
-  const noMatch = () => <p>Dere har ingen filmer til felles her..</p>;
+  const noMatch = () => <p>Dere har ingenting til felles her...</p>;
 
   return (
     <div className="comparison-container">
-      <h2 className='comparison-h2'>Utvalgte filmer for {currentUser.name} og {selectedUser.name}</h2>
+      <h2 className='comparison-h2'>Utvlagte filmer og sjangre for {currentUser.name} og {selectedUser?.name}</h2>
       <section className="user-column">
         <h3>Catch up!</h3>
+        <p>Dere har disse filmene til felles i ønskelisten</p>
         {commonWishlist.length > 0 ? (
           <MovieCard movies={commonWishlist} />
         ) : (
@@ -83,8 +97,26 @@ function Comparison() {
       </section>
       <section className="user-column">
         <h3>Go safe!</h3>
+        <p>Dere har disse filmene som felles favoritter</p>
         {commonFavorites.length > 0 ? (
           <MovieCard movies={commonFavorites} />
+        ) : (
+          noMatch()
+        )}
+      </section>
+      <section className="user-column">
+        <h3>Utforsk</h3>
+        <p>Dere liker begge disse sjangerene</p>
+        {commonGenres.length > 0 ? (
+          <ul>
+          {commonGenres.map((genre, index) => (
+            <Link className='genrecomparison' key={index} to={`/genres/${genre}`}>
+              <li>
+                {genre}
+              </li>
+            </Link>
+          ))}
+        </ul>
         ) : (
           noMatch()
         )}
@@ -92,6 +124,5 @@ function Comparison() {
     </div>
   );
 }
-
 
 export default Comparison;

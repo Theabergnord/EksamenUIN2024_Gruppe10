@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
 
     //Bruker Groq-spørring for å hente id, navn, ønskeliste og favorittliste https://www.sanity.io/docs/query-cheat-sheet
     const fetchUserData = async (userId) => {
-        const query = `*[_type == "user" && _id == $userId]{ _id, name, wishlist, favorites }`
+        const query = `*[_type == "user" && _id == $userId]{ _id, name, wishlist, favorites, favoriteGenres}`
         const params = { userId: userId }
         try {
             const users = await client.fetch(query, params);
