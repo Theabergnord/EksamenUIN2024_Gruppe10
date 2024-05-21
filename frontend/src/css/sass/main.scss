@@ -320,6 +320,18 @@ a {
     }
   }
 
+  .genrelist {
+    display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+        grid-gap: 1em;
+
+    @media (min-width: 1400px) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
   .favoriteGenre {
     border-radius: 6px;
     font-family: $liten_font;
